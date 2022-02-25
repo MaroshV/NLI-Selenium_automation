@@ -7,9 +7,11 @@ PATH = 'c:\webdrivers\chromedriver.exe'
 driver = webdriver.Chrome(PATH)
 
 driver.get('https://www.nli.org.il/')
-time.sleep(10)
+time.sleep(3)
 element = driver.find_element(By.TAG_NAME, "button")
 element.click()
+
+
 
 # (By.CSS_SELECTOR("button.understood font-weight-bold"))
 # onclick="AddAcceptUseCookies()"
