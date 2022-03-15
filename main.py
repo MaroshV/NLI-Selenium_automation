@@ -1,13 +1,20 @@
+import time
+
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.chrome.service import Service
 
-driver = webdriver.Chrome(executable_path=r'C:/webdrivers/chromedriver.exe')
+s = Service('C:/webdrivers/chromedriver.exe')
+driver = webdriver.Chrome(service=s)
 driver.get('https://www.nli.org.il/')
-driver.maximize_window()
+
+#driver = webdriver.Chrome(executable_path=r'C://webdrivers//chromedriver.exe')
+#driver.get('https://www.nli.org.il/')
+#driver.maximize_window()
 
 try:
     accept_cookies = WebDriverWait(driver, 10).until(
@@ -32,14 +39,18 @@ password = driver.find_element(By.ID, 'loginpassword')
 password.clear()
 password.send_keys('Test2022')
 password.send_keys(Keys.RETURN)
+time.sleep(5)
+search_button = driver.find_element(By.CSS_SELECTOR, '.expended_search_btn')
+search_button.click()
 
-login_button = driver.find_element(By.CLASS_NAME, 'btn _btn blue fnt dologin-btn').click()
-
-search_button = driver.find_element(By.CLASS_NAME, 'expended_search_btn js-trigger_search_btn').click()
 search_query = driver.find_element(By.ID, 'searchQuery')
-search_guery.clear()
 search_query.send_keys('Atlit')
 search_query.send_keys(Keys.RETURN)
+time.sleep(6)
+title_results = driver.find_element(By.CSS_SELECTOR, '.item-title')
+print(title_results.text)
+
+driver.quit()
 
 #                              *** IN PROGRESS ***
 
